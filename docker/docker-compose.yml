@@ -73,13 +73,13 @@ services:
 
     volumes:
       - ./ssh-agent/.ssh/id_rsa.pub:/home/git/.ssh/authorized_keys
-      - ../../../CI_CD/gitserver:/srv/git
+      - ../../CI_CD/gitserver:/srv/git
 
   gitweb:
     image: rockstorm/gitweb
 
     volumes:
-      - ../../../CI_CD/gitserver:/srv/git:ro
+      - ../../CI_CD/gitserver:/srv/git:ro
 
 volumes:
   jenkins-data:
