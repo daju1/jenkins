@@ -22,6 +22,19 @@
 ```bash
     docker-compose up --force-recreate --remove-orphans
 ```
+
+![screenshot 1](image/01.png)
+
+![screenshot 2](image/02.png)
+
+![screenshot 3](image/03.png)
+
+![screenshot 4](image/04.png)
+
+![screenshot 5](image/05.png)
+
+![screenshot 6](image/06.png)
+
 ну а после того как поднимутся все сервисы нужно запустить пайтон скрипт
 
 ```bash
