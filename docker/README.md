@@ -201,20 +201,31 @@
     git_server_rockstorm IP is 172.18.0.5
 ```
 
-Эти айпишники нужно использовать при конфигурации нодов и гитсервера
+Эти айпишники нужно использовать при конфигурации нодов
 
+![screenshot 7](images/07.png)
 
-functions inside docker/exec_ssh-keyscan.py
+![screenshot 8](images/08.png)
 
+![screenshot 9](images/09.png)
 
-Now we create new pipeline using local git repo as source
+![screenshot 10](images/10.png)
 
+![screenshot 11](images/11.png)
 
+и гитсервера
 
 New job APK_Jenkinsfiles
 
+![screenshot 12](images/12.png)
 
-functions inside docker/exec_ssh-keyscan.py
+Now we create new pipeline using local git repo as source
+
+![screenshot 13](images/13.png)
+
+![screenshot 14](images/14.png)
+
+![screenshot 15](images/15.png)
 
 для аутентификации в папке
 
