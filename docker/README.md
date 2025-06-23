@@ -23,17 +23,17 @@
     docker-compose up --force-recreate --remove-orphans
 ```
 
-![screenshot 1](image/01.png)
+![screenshot 1](images/01.png)
 
-![screenshot 2](image/02.png)
+![screenshot 2](images/02.png)
 
-![screenshot 3](image/03.png)
+![screenshot 3](images/03.png)
 
-![screenshot 4](image/04.png)
+![screenshot 4](images/04.png)
 
-![screenshot 5](image/05.png)
+![screenshot 5](images/05.png)
 
-![screenshot 6](image/06.png)
+![screenshot 6](images/06.png)
 
 ну а после того как поднимутся все сервисы нужно запустить пайтон скрипт
 
