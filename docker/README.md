@@ -17,6 +17,11 @@
     docker compose up
 ```
 
+в случае ошибки связанной с настройкой сети
+
+```bash
+    docker-compose up --force-recreate --remove-orphans
+```
 ну а после того как поднимутся все сервисы нужно запустить пайтон скрипт
 
 ```bash
@@ -30,126 +35,147 @@
     jenkins/docker$ docker compose build
     jenkins/docker$ docker compose up
     jenkins/docker$ ./exec_ssh-keyscan.py 
-    jenkins_agent IP is 172.21.0.6
-    # Host 172.21.0.6 found: line 28
-    # Host 172.21.0.6 found: line 29
-    # Host 172.21.0.6 found: line 30
-    /var/jenkins_home/.ssh/known_hosts updated.
-    Original contents retained as /var/jenkins_home/.ssh/known_hosts.old
-    known_hosts  known_hosts.old
-    .ssh/known_hosts
-    ['docker', 'exec', '-it', '--workdir=/var/jenkins_home', 'jenkins_sandbox', '/scan-host-key.sh', '172.21.0.6']
-    /scan-host-key.sh: 5: cannot create /root/.ssh/known_hosts: Directory nonexistent
-    # 172.21.0.6:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.6:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.6:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.6:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.6:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
 
-    jenkins_agent_android IP is 172.21.0.9
-    # Host 172.21.0.9 found: line 28
-    # Host 172.21.0.9 found: line 29
-    # Host 172.21.0.9 found: line 30
-    /var/jenkins_home/.ssh/known_hosts updated.
-    Original contents retained as /var/jenkins_home/.ssh/known_hosts.old
-    known_hosts  known_hosts.old
-    .ssh/known_hosts
-    ['docker', 'exec', '-it', '--workdir=/var/jenkins_home', 'jenkins_sandbox', '/scan-host-key.sh', '172.21.0.9']
-    /scan-host-key.sh: 5: cannot create /root/.ssh/known_hosts: Directory nonexistent
-    # 172.21.0.9:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.9:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.9:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.9:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-    # 172.21.0.9:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
-
-    git_server_rockstorm IP is 172.21.0.4
-    # Host 172.21.0.4 found: line 28
-    # Host 172.21.0.4 found: line 29
-    # Host 172.21.0.4 found: line 30
-    /var/jenkins_home/.ssh/known_hosts updated.
-    Original contents retained as /var/jenkins_home/.ssh/known_hosts.old
+    jenkins_agent IP is 172.18.0.3
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
+    Host 172.18.0.3 not found in /var/jenkins_home/.ssh/known_hosts
+    docker exec -it --workdir=/root/ jenkins_sandbox
     Cannot stat /root//.ssh/known_hosts: No such file or directory
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
     known_hosts  known_hosts.old
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
     .ssh/known_hosts
-    ['docker', 'exec', '-it', '--workdir=/var/jenkins_home', 'jenkins_sandbox', '/scan-host-key.sh', '172.21.0.4']
-    /scan-host-key.sh: 5: cannot create /root/.ssh/known_hosts: Directory nonexistent
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
+    ['docker', 'exec', '-it', '--workdir=/var/jenkins_home', 'jenkins_sandbox', '/scan-host-key.sh', '172.18.0.3', '/var/jenkins_home']
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
 
+    docker exec -it --workdir=/root/ jenkins_sandbox
     ls: cannot access '.ssh': No such file or directory
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    docker exec -it --workdir=/root/ jenkins_sandbox
     ls: cannot access '.ssh/known_hosts': No such file or directory
-    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_sandbox', '/scan-host-key.sh', '172.21.0.4']
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_sandbox', '/scan-host-key.sh', '172.18.0.3', '/root/']
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.3:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
 
-    # Host 172.21.0.4 found: line 1
-    # Host 172.21.0.4 found: line 2
-    # Host 172.21.0.4 found: line 3
-    /home/jenkins/.ssh/known_hosts updated.
-    Original contents retained as /home/jenkins/.ssh/known_hosts.old
-    authorized_keys  known_hosts  known_hosts.old
+    jenkins_agent_android IP is 172.18.0.4
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
+    Host 172.18.0.4 not found in /var/jenkins_home/.ssh/known_hosts
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    Host 172.18.0.4 not found in /root//.ssh/known_hosts
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
+    known_hosts  known_hosts.old
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
     .ssh/known_hosts
-    ['docker', 'exec', '-it', '--workdir=/home/jenkins', 'jenkins_agent', '/scan-host-key.sh', '172.21.0.4']
-    /scan-host-key.sh: 5: cannot create /root/.ssh/known_hosts: Directory nonexistent
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
+    ['docker', 'exec', '-it', '--workdir=/var/jenkins_home', 'jenkins_sandbox', '/scan-host-key.sh', '172.18.0.4', '/var/jenkins_home']
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
 
-    ls: cannot access '.ssh': No such file or directory
-    ls: cannot access '.ssh/known_hosts': No such file or directory
-    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_agent', '/scan-host-key.sh', '172.21.0.4']
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-
-    # Host 172.21.0.4 found: line 1
-    # Host 172.21.0.4 found: line 2
-    # Host 172.21.0.4 found: line 3
-    /home/jenkins/.ssh/known_hosts updated.
-    Original contents retained as /home/jenkins/.ssh/known_hosts.old
-    authorized_keys  known_hosts  known_hosts.old
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    known_hosts
+    docker exec -it --workdir=/root/ jenkins_sandbox
     .ssh/known_hosts
-    ['docker', 'exec', '-it', '--workdir=/home/jenkins', 'jenkins_agent_android', '/scan-host-key.sh', '172.21.0.4']
-    /scan-host-key.sh: 5: cannot create /root/.ssh/known_hosts: Directory nonexistent
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
+    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_sandbox', '/scan-host-key.sh', '172.18.0.4', '/root/']
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
+    # 172.18.0.4:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u5
 
-    ls: cannot access '.ssh': No such file or directory
+    git_server_rockstorm IP is 172.18.0.5
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
+    Host 172.18.0.5 not found in /var/jenkins_home/.ssh/known_hosts
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    Host 172.18.0.5 not found in /root//.ssh/known_hosts
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
+    known_hosts  known_hosts.old
+    docker exec -it --workdir=/var/jenkins_home jenkins_sandbox
+    .ssh/known_hosts
+    ['docker', 'exec', '-it', '--workdir=/var/jenkins_home', 'jenkins_sandbox', '/scan-host-key.sh', '172.18.0.5', '/var/jenkins_home']
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    known_hosts
+    docker exec -it --workdir=/root/ jenkins_sandbox
+    .ssh/known_hosts
+    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_sandbox', '/scan-host-key.sh', '172.18.0.5', '/root/']
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+
+    docker exec -it --workdir=/home/jenkins jenkins_agent
+    Cannot stat /home/jenkins/.ssh/known_hosts: No such file or directory
+    docker exec -it --workdir=/root/ jenkins_agent
+    Cannot stat /root//.ssh/known_hosts: No such file or directory
+    docker exec -it --workdir=/home/jenkins jenkins_agent
+    authorized_keys
+    docker exec -it --workdir=/home/jenkins jenkins_agent
     ls: cannot access '.ssh/known_hosts': No such file or directory
-    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_agent_android', '/scan-host-key.sh', '172.21.0.4']
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
-    # 172.21.0.4:22 SSH-2.0-OpenSSH_10.0
+    docker exec -it --workdir=/home/jenkins jenkins_agent
+    ['docker', 'exec', '-it', '--workdir=/home/jenkins', 'jenkins_agent', '/scan-host-key.sh', '172.18.0.5', '/home/jenkins']
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+
+    docker exec -it --workdir=/root/ jenkins_agent
+    ls: cannot access '.ssh': No such file or directory
+    docker exec -it --workdir=/root/ jenkins_agent
+    docker exec -it --workdir=/root/ jenkins_agent
+    ls: cannot access '.ssh/known_hosts': No such file or directory
+    docker exec -it --workdir=/root/ jenkins_agent
+    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_agent', '/scan-host-key.sh', '172.18.0.5', '/root/']
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+
+    docker exec -it --workdir=/home/jenkins jenkins_agent_android
+    Cannot stat /home/jenkins/.ssh/known_hosts: No such file or directory
+    docker exec -it --workdir=/root/ jenkins_agent_android
+    Cannot stat /root//.ssh/known_hosts: No such file or directory
+    docker exec -it --workdir=/home/jenkins jenkins_agent_android
+    authorized_keys
+    docker exec -it --workdir=/home/jenkins jenkins_agent_android
+    ls: cannot access '.ssh/known_hosts': No such file or directory
+    docker exec -it --workdir=/home/jenkins jenkins_agent_android
+    ['docker', 'exec', '-it', '--workdir=/home/jenkins', 'jenkins_agent_android', '/scan-host-key.sh', '172.18.0.5', '/home/jenkins']
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+
+    docker exec -it --workdir=/root/ jenkins_agent_android
+    ls: cannot access '.ssh': No such file or directory
+    docker exec -it --workdir=/root/ jenkins_agent_android
+    docker exec -it --workdir=/root/ jenkins_agent_android
+    ls: cannot access '.ssh/known_hosts': No such file or directory
+    docker exec -it --workdir=/root/ jenkins_agent_android
+    ['docker', 'exec', '-it', '--workdir=/root/', 'jenkins_agent_android', '/scan-host-key.sh', '172.18.0.5', '/root/']
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
+    # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
 
 ```
 
@@ -157,9 +183,9 @@
 из логов пайтон скрипта нужно узнать айпишники ssh-agent, ssh-agent-android и гитсервера
 
 ```bash
-    jenkins_agent IP is 172.21.0.9
-    jenkins_agent_android IP is 172.21.0.5
-    git_server_rockstorm IP is 172.21.0.8
+    jenkins_agent IP is 172.18.0.3
+    jenkins_agent_android IP is 172.18.0.4
+    git_server_rockstorm IP is 172.18.0.5
 ```
 
 Эти айпишники нужно использовать при конфигурации нодов и гитсервера

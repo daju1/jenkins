@@ -1,5 +1,14 @@
 version: "3"
 
+networks:
+  frontend:
+    driver: default
+    ipam:
+      driver: default
+      config:
+       - subnet: 172.18.0.0/24
+         gateway: 172.18.0.1
+
 services:
   jenkins-docker:
     image: docker:dind
@@ -14,12 +23,13 @@ services:
       - 2377:2376
 
   jenkins-built-in:
-    # image: jenkins/jenkins:lts
-    # image: jenkins/jenkins:2.492.3-jdk17
     build: ./built-in
     container_name: jenkins_sandbox
     privileged: true
     user: root
+    networks:
+        frontend:
+            ipv4_address: 172.18.0.2
     ports:
       - 8081:8080
       - 50001:50000
@@ -29,12 +39,14 @@ services:
       - jenkins-docker-certs:/certs/client:ro
 
   jenkins-agent:
-    #image: jenkins/ssh-agent:jdk11
     build:
-      context: ./ssh-agent-android
+      context: ./ssh-agent
     container_name: jenkins_agent
     privileged: true
     user: root
+    networks:
+        frontend:
+            ipv4_address: 172.18.0.3
     expose:
       - 22
     ports:
@@ -45,13 +57,15 @@ services:
       - ssh_agent_pubkey
 
   jenkins-agent-android:
-    #image: jenkins/ssh-agent:jdk11
     build:
       context: ./ssh-agent-android
 
     container_name: jenkins_agent_android
     privileged: true
     user: root
+    networks:
+        frontend:
+            ipv4_address: 172.18.0.4
     expose:
       - 22
     ports:
@@ -65,9 +79,14 @@ services:
     container_name: git_server_rockstorm
 
     image: rockstorm/git-server
+    privileged: true
 
     environment:
       SSH_AUTH_METHODS: "publickey"
+
+    networks:
+        frontend:
+            ipv4_address: 172.18.0.5
     ports:
       - 2202:22
 
@@ -77,6 +96,10 @@ services:
 
   gitweb:
     image: rockstorm/gitweb
+    privileged: true
+    networks:
+        frontend:
+            ipv4_address: 172.18.0.6
 
     volumes:
       - ../../CI_CD/gitserver:/srv/git:ro
