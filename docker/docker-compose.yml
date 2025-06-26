@@ -1,10 +1,8 @@
 version: "3"
 
 networks:
-  frontend:
-    driver: default
+  myjenkins:
     ipam:
-      driver: default
       config:
        - subnet: 172.18.0.0/24
          gateway: 172.18.0.1
@@ -28,11 +26,11 @@ services:
     privileged: true
     user: root
     networks:
-        frontend:
+        myjenkins:
             ipv4_address: 172.18.0.2
     ports:
-      - 8081:8080
-      - 50001:50000
+      - 8082:8080
+      - 50002:50000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - jenkins-data:/var/jenkins_home
@@ -45,7 +43,7 @@ services:
     privileged: true
     user: root
     networks:
-        frontend:
+        myjenkins:
             ipv4_address: 172.18.0.3
     expose:
       - 22
@@ -64,7 +62,7 @@ services:
     privileged: true
     user: root
     networks:
-        frontend:
+        myjenkins:
             ipv4_address: 172.18.0.4
     expose:
       - 22
@@ -74,8 +72,6 @@ services:
       - JENKINS_AGENT_SSH_PUBKEY=${JENKINS_AGENT_SSH_PUBLIC_KEY}
     secrets:
       - ssh_agent_pubkey
-    volumes:
-      - ./ssh-agent/.ssh/id_rsa:/home/jenkins/.ssh/id_rsa
 
   git-server-rockstorm:
     container_name: git_server_rockstorm
@@ -87,24 +83,24 @@ services:
       SSH_AUTH_METHODS: "publickey"
 
     networks:
-        frontend:
+        myjenkins:
             ipv4_address: 172.18.0.5
     ports:
       - 2202:22
 
     volumes:
       - ./ssh-agent/.ssh/id_rsa.pub:/home/git/.ssh/authorized_keys
-      - ../../CI_CD/gitserver:/srv/git
+      - ../../gitserver:/srv/git
 
   gitweb:
     image: rockstorm/gitweb
     privileged: true
     networks:
-        frontend:
+        myjenkins:
             ipv4_address: 172.18.0.6
 
     volumes:
-      - ../../CI_CD/gitserver:/srv/git:ro
+      - ../../gitserver:/srv/git:ro
 
 volumes:
   jenkins-data:

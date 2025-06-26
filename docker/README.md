@@ -1,22 +1,46 @@
 # Local Git repo creation
-для начала исходя из [следующего руководства](https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server) я создал локальный гит сервер с помощью следующего набора команд (относительно выбранной рабочей папки)
+для начала исходя из [следующего руководства](https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server) 
+
+относительно выбранной рабочей папки например jenkins_work
 
 ```bash
-    mkdir -p CI_CD/gitserver/.ssh
-    cd CI_CD/gitserver
+    mkdir jenkins_work
+    cd jenkins_work
+```
+я создал локальный гит сервер содержащий проект myproject.git с помощью следующего набора команд 
+
+```bash
+    mkdir -p gitserver/.ssh
+    cd gitserver
     chmod 700 .ssh
     touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
     cat ~/.ssh/id_rsa.pub >> .ssh/authorized_keys 
-    mkdir project.git
-    cd project.git
+    mkdir myproject.git
+    cd myproject.git
     git init --bare
-```    
-    Initialized empty Git repository in CI_CD/gitserver/project.git/
+```
+    Initialized empty Git repository in gitserver/myproject.git/
 
+
+Далее мы либо создаём локальный гит репозитрорий
+
+```bash
+    cd jenkins_work
+    mkdir my_project
+    cd my_project
+    git init
+```
+
+либо в папке my_project с уже имеющимся локальным гит репозиторием создаём remote url который соответствует файловому пути к папке моего проекта в гитрепозитории
+
+```bash
+    git remote set-url origin jenkins_work/gitserver/myproject.git
+```
 
 Далее возвращаемся в рабочую папку и клонируем в нее текущий репозиторий
 
 ```bash
+    cd jenkins_work
     git clone git@github.com:daju1/jenkins.git
 ```
 
