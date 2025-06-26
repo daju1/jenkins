@@ -2,18 +2,17 @@
 для начала исходя из [следующего руководства](https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server) я создал локальный гит сервер с помощью следующего набора команд (относительно выбранной рабочей папки)
 
 ```bash
-    mkdir CI_CD
-    cd CI_CD
-    mkdir gitserver
-    cd gitserver
-    CI_CD/gitserver$ mkdir .ssh && chmod 700 .ssh
-    CI_CD/gitserver$ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
-    CI_CD/gitserver$ cat ~/.ssh/id_rsa.pub >> .ssh/authorized_keys 
-    CI_CD/gitserver$ mkdir project.git
-    CI_CD/gitserver$ cd project.git
-    CI_CD/gitserver/project.git$ git init --bare
+    mkdir -p CI_CD/gitserver/.ssh
+    cd CI_CD/gitserver
+    chmod 700 .ssh
+    touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
+    cat ~/.ssh/id_rsa.pub >> .ssh/authorized_keys 
+    mkdir project.git
+    cd project.git
+    git init --bare
+```    
     Initialized empty Git repository in CI_CD/gitserver/project.git/
-```
+
 
 Далее в рабочую папку клонируется репозиторий
 
