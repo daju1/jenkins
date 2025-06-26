@@ -1,6 +1,15 @@
 # Local Git repo creation
+для начала исходя из следующего руководства
+
+# https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server
+
+я создал локальный гит сервер
 
 ```bash
+    mkdir CI_CD
+    cd CI_CD
+    mkdir gitserver
+    cd gitserver
     CI_CD/gitserver$ mkdir .ssh && chmod 700 .ssh
     CI_CD/gitserver$ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
     CI_CD/gitserver$ cat ~/.ssh/id_rsa.pub >> .ssh/authorized_keys 
