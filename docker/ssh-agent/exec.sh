@@ -1,2 +1,2 @@
-docker exec -it --workdir=/home/jenkins agent /bin/bash
+docker exec -it --workdir=/home/jenkins jenkins_agent /bin/bash
 
