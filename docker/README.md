@@ -14,7 +14,7 @@
     Initialized empty Git repository in CI_CD/gitserver/project.git/
 
 
-Далее в рабочую папку клонируется репозиторий
+Далее возвращаемся в рабочую папку и клонируем в нее текущий репозиторий
 
 ```bash
     git clone git@github.com:daju1/jenkins.git
@@ -30,6 +30,7 @@
 в случае ошибки связанной с настройкой сети
 
 ```bash
+    docker compose rm
     docker-compose up --force-recreate --remove-orphans
 ```
 
