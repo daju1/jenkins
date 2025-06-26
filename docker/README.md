@@ -1,9 +1,5 @@
 # Local Git repo creation
-для начала исходя из следующего руководства
-
-# https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server
-
-я создал локальный гит сервер
+для начала исходя из [следующего руководства](https://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server) я создал локальный гит сервер с помощью следующего набора команд (относительно выбранной рабочей папки)
 
 ```bash
     mkdir CI_CD
@@ -19,9 +15,15 @@
     Initialized empty Git repository in CI_CD/gitserver/project.git/
 ```
 
+Далее в рабочую папку клонируется репозиторий
+
+```bash
+    git clone git@github.com:daju1/jenkins.git
+```
 после апдейта репозитория можно остановить docker composer с помощью Ctrl+C в терминале где он запущен, затем 
 
 ```bash
+    cd jenkins/docker
     docker compose build
     docker compose up
 ```
