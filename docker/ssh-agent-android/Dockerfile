@@ -1,4 +1,4 @@
-FROM jenkins/ssh-agent:latest
+FROM jenkins/ssh-agent:jdk17
 
 
 # Define variables

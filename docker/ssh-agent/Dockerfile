@@ -1,5 +1,4 @@
-FROM jenkins/ssh-agent:latest
-#FROM jenkins/ssh-agent:jdk11
+FROM jenkins/ssh-agent:jdk17
 
 RUN apt-get update
 RUN apt-get -y install git mc nano vim
