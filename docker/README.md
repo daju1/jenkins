@@ -19,6 +19,19 @@
 ```bash
     git clone git@github.com:daju1/jenkins.git
 ```
+
+для аутентификации в папке
+
+docker/ssh-agent
+
+нужно сгенерировать или скопировать в эту папку ключи
+
+```bash
+    jenkins$ ls docker/ssh-agent/.ssh/
+    id_rsa id_rsa.pub
+```
+у меня эти ключи сгенерированы для пользователя jenkins
+
 после апдейта репозитория можно остановить docker composer с помощью Ctrl+C в терминале где он запущен, затем 
 
 ```bash
@@ -31,6 +44,7 @@
 
 ```bash
     docker compose rm
+    docker network prune
     docker-compose up --force-recreate --remove-orphans
 ```
 
@@ -237,15 +251,3 @@ Now we create new pipeline using local git repo as source
 ![screenshot 14](images/14.png)
 
 ![screenshot 15](images/15.png)
-
-для аутентификации в папке
-
-docker/ssh-agent
-
-нужно сгенерировать или скопировать в эту папку ключи
-
-```bash
-    jenkins$ ls docker/ssh-agent/.ssh/
-    id_rsa id_rsa.pub
-```
-у меня эти ключи сгенерированы для пользователя jenkins
