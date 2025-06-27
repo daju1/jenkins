@@ -178,10 +178,10 @@ def add_git_server_known_host (host_container):
 jenkins_builtin_container_name = "jenkins_sandbox"
 # jenkins_builtin_container_name = "jenkins-blueocean"
 
-add_jenkins_agent_known_host (jenkins_builtin_container_name, "jenkins_agent"):
-add_jenkins_agent_known_host (jenkins_builtin_container_name, "jenkins_agent_android"):
+add_jenkins_agent_known_host (jenkins_builtin_container_name, "jenkins_agent")
+add_jenkins_agent_known_host (jenkins_builtin_container_name, "jenkins_agent_android")
 
-add_git_server_known_host ("git_server_rockstorm"):
+add_git_server_known_host ("git_server_rockstorm")
 
 
 # view_pub_key("jenkins_agent", "/home/jenkins")
