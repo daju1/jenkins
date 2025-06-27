@@ -37,7 +37,7 @@
     git remote add origin jenkins_work/gitserver/myproject.git
 ```
 
-или если локальный репозиторий уже имеет remote url тогда меняяем его
+или, если локальный репозиторий уже имеет remote url, тогда меняем его
 
 ```bash
     git remote set-url origin jenkins_work/gitserver/myproject.git
@@ -61,7 +61,7 @@ origin	jenkins_work/gitserver/myproject.git (push)
     git clone https://github.com/daju1/jenkins.git
 ```
 
-таким обюразом мы имеем следующую структуру папок
+таким образом мы имеем следующую структуру папок
 
 ```
 jenkins_work$ ls -la
@@ -79,10 +79,10 @@ gitserver  jenkins  my_project
     ssh-keygen -f .ssh/id_rsa -C jenkins
 ```
 
-или скопировать в эту папку уже имеющиеся ключи (по желанию)
+или скопировать в эту папку уже имеющиеся ключи (по желанию). Структура файлов с ключами должна выглядеть следующим образом
 
 ```bash
-    jenkins$ ls docker/ssh-agent/.ssh/
+    jenkins_work/jenkins$ ls docker/ssh-agent/.ssh/
     id_rsa id_rsa.pub
 ```
 
@@ -105,7 +105,7 @@ gitserver  jenkins  my_project
     docker compose rm
     docker network prune
 ```
-и (однократно) производим контейнеров со следующими параметрами
+и (однократно) производим запуск контейнеров со следующими параметрами
 
 ```bash
     docker compose up --force-recreate --remove-orphans
