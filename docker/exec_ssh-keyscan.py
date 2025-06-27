@@ -132,7 +132,7 @@ def view_pub_key (jenkins_container_name, workdir):
 
 def add_jenkins_agent_known_host_ip(jenkins_builtin_container_name,  host_container_ip):
     ssh_keygen_R    (jenkins_builtin_container_name, "/var/jenkins_home", host_container_ip)
-    ssh_keygen_R    (jenkins_builtin_container_name,                      host_container_ip)
+    ssh_keygen_R    (jenkins_builtin_container_name, "/root/",            host_container_ip)
     add_known_hosts (jenkins_builtin_container_name, "/var/jenkins_home", host_container_ip)
     add_known_hosts (jenkins_builtin_container_name, "/root/",            host_container_ip)
 
