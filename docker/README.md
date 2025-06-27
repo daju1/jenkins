@@ -146,7 +146,7 @@ WARN[0000] The "JENKINS_AGENT_SSH_PUBLIC_KEY" variable is not set. Defaulting to
 failed to create network docker_myjenkins: Error response from daemon: Pool overlaps with other one on this address space
 ```
 
-и (однократно) производим запуск контейнеров со следующими параметрами
+тогда (однократно) производим запуск контейнеров со следующими параметрами
 
 ```bash
     docker network prune
