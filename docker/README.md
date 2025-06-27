@@ -54,6 +54,16 @@ origin	jenkins_work/gitserver/myproject.git (fetch)
 origin	jenkins_work/gitserver/myproject.git (push)
 ```
 
+TODO: 
+```
+jenkins_work/my_project$ git push origin master 
+Counting objects: 27, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (20/20), done.
+error: remote unpack failed: unable to create temporary object directory
+error: failed to push some refs to '/usr3/jenkins_work/gitserver/myproject.git'
+```
+
 Далее возвращаемся в рабочую папку и клонируем в нее текущий репозиторий
 
 ```bash
