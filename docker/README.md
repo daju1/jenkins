@@ -22,7 +22,7 @@
     Initialized empty Git repository in gitserver/myproject.git/
 
 
-Далее мы либо создаём локальный гит репозитрорий
+Далее мы либо создаём локальный гит репозитрорий (например в папке my_project)
 
 ```bash
     cd jenkins_work
@@ -31,7 +31,7 @@
     git init
 ```
 
-либо в папке my_project с уже имеющимся локальным гит репозиторием создаём remote url который соответствует файловому пути к папке моего проекта в гитрепозитории
+либо в папке с уже имеющимся локальным гит репозиторием создаём remote url который соответствует файловому пути к папке моего проекта в гитрепозитории
 
 ```bash
     git remote add origin jenkins_work/gitserver/myproject.git
@@ -49,9 +49,10 @@
     git remote -v
 ```
 
+```
 origin	jenkins_work/gitserver/myproject.git (fetch)
 origin	jenkins_work/gitserver/myproject.git (push)
-
+```
 
 Далее возвращаемся в рабочую папку и клонируем в нее текущий репозиторий
 
@@ -67,13 +68,7 @@ jenkins_work$ ls -la
 gitserver  jenkins  my_project
 ```
 
-для аутентификации в папке
-
-docker/ssh-agent
-
-нужно сгенерировать
-
-у меня эти ключи сгенерированы для пользователя jenkins
+для аутентификации в папке docker/ssh-agent нужно сгенерировать ssh ключи (у меня эти ключи сгенерированы для пользователя jenkins)
 
 ```bash
     cd jenkins_work/jenkins/docker/ssh-agent
@@ -91,9 +86,8 @@ docker/ssh-agent
     id_rsa id_rsa.pub
 ```
 
-Далее приступаем к билду и запуску докер контейнеров
+Далее приступаем к билду и запуску докер контейнеров. Для этого переходим в папку
 
-для этого переходим в папку
 ```bash
     cd jenkins_work/jenkins/docker$
 ```
@@ -110,6 +104,10 @@ docker/ssh-agent
 ```bash
     docker compose rm
     docker network prune
+```
+и (однократно) производим контейнеров со следующими параметрами
+
+```bash
     docker compose up --force-recreate --remove-orphans
 ```
 
@@ -292,8 +290,7 @@ docker/ssh-agent
     # 172.18.0.5:22 SSH-2.0-OpenSSH_10.0
 ```
 
-
-из логов пайтон скрипта нужно узнать айпишники ssh-agent, ssh-agent-android и гитсервера
+из логов пайтон скрипта можно узнать айпишники ssh-agent, ssh-agent-android и гитсервера
 
 ```bash
     jenkins_agent IP is 172.18.0.3
@@ -301,7 +298,7 @@ docker/ssh-agent
     git_server_rockstorm IP is 172.18.0.5
 ```
 
-Эти айпишники нужно использовать при конфигурации нодов
+Эти айпишники (а они должны соотвествовать статически прописанным в yml файле) нужно использовать при конфигурации нодов
 
 ![screenshot 7](images/07.png)
 
@@ -326,3 +323,55 @@ Now we create new pipeline using local git repo as source
 ![screenshot 14](images/14.png)
 
 ![screenshot 15](images/15.png)
+
+на что важно обратить внимание. При выполнении команды
+```bash
+$ docker volume ls
+```
+
+можно среди списков томов увидеть следующие
+
+```
+DRIVER    VOLUME NAME
+local     docker_jenkins-data
+local     docker_jenkins-docker-certs
+local     jenkins-data
+local     jenkins-docker-certs
+```
+
+причём, тома
+
+ ```
+DRIVER    VOLUME NAME
+local     docker_jenkins-data
+local     docker_jenkins-docker-certs
+```
+
+созданы docker compose, а тома
+
+```
+DRIVER    VOLUME NAME
+local     jenkins-data
+local     jenkins-docker-certs
+```
+
+созданы без использования docker compose, но с использованием команд типа docker build, docker run. есди в этих старых томах содержатся настройки jenkins которые хотелось бы перенести во вновь создаваемую согласно текушей инструкции песочницу то [согласно подхода](https://stackoverflow.com/questions/60148581/re-using-existing-volume-with-docker-compose) нужно будет произвести следующие правки
+
+```
+diff --git a/docker/docker-compose.yml b/docker/docker-compose.yml
+index 9864682..12f8bfc 100644
+--- a/docker/docker-compose.yml
++++ b/docker/docker-compose.yml
+@@ -104,7 +104,11 @@ services:
+ 
+ volumes:
+   jenkins-data:
++    external: true
++    name: jenkins-data
+   jenkins-docker-certs:
++    external: true
++    name: jenkins-docker-certs
+ 
+ secrets:
+    ssh_agent_pubkey:
+```
