@@ -134,9 +134,22 @@ gitserver  jenkins  my_project
     docker compose rm
     docker network prune
 ```
+если даже после этого возникает ошибка типа
+```
+jenkins/docker$ docker compose up
+WARN[0000] The "JENKINS_AGENT_SSH_PUBLIC_KEY" variable is not set. Defaulting to a blank string. 
+WARN[0000] The "JENKINS_AGENT_SSH_PUBLIC_KEY" variable is not set. Defaulting to a blank string. 
+[+] Building 0.0s (0/0)                                                                                                                                                                  
+[+] Running 2/0
+ ✔ Network docker_default    Created                                                                                                                                                0.1s 
+ ✘ Network docker_myjenkins  Error                                                                                                                                                  0.0s 
+failed to create network docker_myjenkins: Error response from daemon: Pool overlaps with other one on this address space
+```
+
 и (однократно) производим запуск контейнеров со следующими параметрами
 
 ```bash
+    docker network prune
     docker compose up --force-recreate --remove-orphans
 ```
 
