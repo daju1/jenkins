@@ -54,7 +54,7 @@ origin	jenkins_work/gitserver/myproject.git (fetch)
 origin	jenkins_work/gitserver/myproject.git (push)
 ```
 
-TODO: 
+TODO: следуя приведенной выше инструкции пуш в репозиторий получается только лишь с помощью sudo, а иначе
 ```
 jenkins_work/my_project$ git push origin master 
 Counting objects: 27, done.
