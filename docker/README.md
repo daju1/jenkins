@@ -374,6 +374,10 @@ New job APK_Jenkinsfiles
 
 Now we create new pipeline using local git repo as source
 
+```
+ssh://git@172.18.0.5:22/srv/git/myproject.git
+```
+
 ![screenshot 13](images/13.png)
 
 ![screenshot 14](images/14.png)
