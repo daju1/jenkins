@@ -130,35 +130,42 @@ def view_pub_key (jenkins_container_name, workdir):
     #ret = sys_cmd (jenkins_container_name, workdir, cmd)
     #print(ret)
 
-def add_jenkins_agent_known_host_ip(host_container_ip):
-    ssh_keygen_R    ("jenkins_sandbox", "/var/jenkins_home", host_container_ip)
-    ssh_keygen_R    ("jenkins_sandbox", "/root/",            host_container_ip)
-    add_known_hosts ("jenkins_sandbox", "/var/jenkins_home", host_container_ip)
-    add_known_hosts ("jenkins_sandbox", "/root/",            host_container_ip)
+def add_jenkins_agent_known_host_ip(jenkins_builtin_container_name,  host_container_ip):
+    ssh_keygen_R    (jenkins_builtin_container_name, "/var/jenkins_home", host_container_ip)
+    ssh_keygen_R    (jenkins_builtin_container_name,                      host_container_ip)
+    add_known_hosts (jenkins_builtin_container_name, "/var/jenkins_home", host_container_ip)
+    add_known_hosts (jenkins_builtin_container_name, "/root/",            host_container_ip)
 
-def add_jenkins_agent_known_host (host_container):
+def add_jenkins_agent_known_host (jenkins_builtin_container_name, host_container):
     host_container_ip = get_container_ip (host_container)
     if host_container_ip is not None:
         print(host_container + " IP is " + host_container_ip)
-        add_jenkins_agent_known_host_ip(host_container_ip)
+        add_jenkins_agent_known_host_ip(jenkins_builtin_container_name, host_container_ip)
         return True
     return False
 
 def add_git_server_known_host_ip (host_container_ip):
-    ssh_keygen_R    ("jenkins_sandbox",       "/var/jenkins_home", host_container_ip)
-    ssh_keygen_R    ("jenkins_sandbox",       "/root/",            host_container_ip)
-    add_known_hosts ("jenkins_sandbox",       "/var/jenkins_home", host_container_ip)
-    add_known_hosts ("jenkins_sandbox",       "/root/",            host_container_ip)
 
-    ssh_keygen_R    ("jenkins_agent",         "/home/jenkins",     host_container_ip)
-    ssh_keygen_R    ("jenkins_agent",         "/root/",            host_container_ip)
-    add_known_hosts ("jenkins_agent",         "/home/jenkins",     host_container_ip)
-    add_known_hosts ("jenkins_agent",         "/root/",            host_container_ip)
+    jenkins_builtin_container_name = "jenkins_sandbox"
 
-    ssh_keygen_R    ("jenkins_agent_android", "/home/jenkins",     host_container_ip)
-    ssh_keygen_R    ("jenkins_agent_android", "/root/",            host_container_ip)
-    add_known_hosts ("jenkins_agent_android", "/home/jenkins",     host_container_ip)
-    add_known_hosts ("jenkins_agent_android", "/root/",            host_container_ip)
+    ssh_keygen_R    (jenkins_builtin_container_name,       "/var/jenkins_home", host_container_ip)
+    ssh_keygen_R    (jenkins_builtin_container_name,       "/root/",            host_container_ip)
+    add_known_hosts (jenkins_builtin_container_name,       "/var/jenkins_home", host_container_ip)
+    add_known_hosts (jenkins_builtin_container_name,       "/root/",            host_container_ip)
+
+    jenkins_agent_container_name = "jenkins_agent"
+
+    ssh_keygen_R    (jenkins_agent_container_name,         "/home/jenkins",     host_container_ip)
+    ssh_keygen_R    (jenkins_agent_container_name,         "/root/",            host_container_ip)
+    add_known_hosts (jenkins_agent_container_name,         "/home/jenkins",     host_container_ip)
+    add_known_hosts (jenkins_agent_container_name,         "/root/",            host_container_ip)
+
+    jenkins_agent_android_container_name = "jenkins_agent_android"
+
+    ssh_keygen_R    (jenkins_agent_android_container_name, "/home/jenkins",     host_container_ip)
+    ssh_keygen_R    (jenkins_agent_android_container_name, "/root/",            host_container_ip)
+    add_known_hosts (jenkins_agent_android_container_name, "/home/jenkins",     host_container_ip)
+    add_known_hosts (jenkins_agent_android_container_name, "/root/",            host_container_ip)
 
 def add_git_server_known_host (host_container):
     host_container_ip = get_container_ip (host_container)
@@ -168,17 +175,14 @@ def add_git_server_known_host (host_container):
         return True
     return False
 
-if not add_jenkins_agent_known_host ("jenkins_agent"):
-    jenkins_agent_ip = "172.18.0.3"
-    add_jenkins_agent_known_host_ip(jenkins_agent_ip)
+jenkins_builtin_container_name = "jenkins_sandbox"
+# jenkins_builtin_container_name = "jenkins-blueocean"
 
-if not add_jenkins_agent_known_host ("jenkins_agent_android"):
-    jenkins_agent_android_ip = "172.18.0.4"
-    add_jenkins_agent_known_host_ip(jenkins_agent_android_ip)
+add_jenkins_agent_known_host (jenkins_builtin_container_name, "jenkins_agent"):
+add_jenkins_agent_known_host (jenkins_builtin_container_name, "jenkins_agent_android"):
 
-if not add_git_server_known_host ("git_server_rockstorm"):
-    git_server_rockstorm_ip = "172.18.0.5"
-    add_git_server_known_host_ip (git_server_rockstorm_ip)
+add_git_server_known_host ("git_server_rockstorm"):
+
 
 # view_pub_key("jenkins_agent", "/home/jenkins")
 # view_pub_key("git_server_rockstorm", "/home/git")
