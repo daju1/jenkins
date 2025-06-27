@@ -355,7 +355,9 @@ local     jenkins-data
 local     jenkins-docker-certs
 ```
 
-созданы без использования docker compose, но с использованием команд типа docker build, docker run. есди в этих старых томах содержатся настройки jenkins которые хотелось бы перенести во вновь создаваемую согласно текушей инструкции песочницу то [согласно подхода](https://stackoverflow.com/questions/60148581/re-using-existing-volume-with-docker-compose) нужно будет произвести следующие правки
+созданы без использования docker compose, но с использованием команд типа docker build, docker run.
+
+ Если в этих старых томах содержатся настройки jenkins которые хотелось бы перенести во вновь создаваемую, согласно текушей инструкции, песочницу, то [согласно подхода](https://stackoverflow.com/questions/60148581/re-using-existing-volume-with-docker-compose) нужно будет произвести следующие правки
 
 ```
 diff --git a/docker/docker-compose.yml b/docker/docker-compose.yml
