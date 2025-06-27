@@ -324,7 +324,8 @@ Now we create new pipeline using local git repo as source
 
 ![screenshot 15](images/15.png)
 
-на что важно обратить внимание. При выполнении команды
+На что важно обратить внимание. При выполнении команды
+
 ```bash
 $ docker volume ls
 ```
