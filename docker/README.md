@@ -64,6 +64,25 @@ error: remote unpack failed: unable to create temporary object directory
 error: failed to push some refs to '/usr3/jenkins_work/gitserver/myproject.git'
 ```
 
+Пофиксить эту проблему удалось с помощью следующёй команды
+
+```bash
+    cd jenkins_work/gitserver
+    sudo chown -R ${USER} myproject.git
+```
+
+После чего
+```
+jenkins_work/my_project$ git push origin master 
+Counting objects: 27, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (20/20), done.
+Writing objects: 100% (27/27), 17.44 KiB | 2.49 MiB/s, done.
+Total 27 (delta 10), reused 0 (delta 0)
+To /usr3/jenkins_work/gitserver/myproject.git
+ * [new branch]      master -> master
+```
+
 Далее возвращаемся в рабочую папку и клонируем в нее текущий репозиторий
 
 ```bash
