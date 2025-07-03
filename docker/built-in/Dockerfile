@@ -2,7 +2,7 @@
 # https://pkg.origin.jenkins.io/debian-stable/
 # https://www.jenkins.io/doc/book/installing/docker/
 
-FROM jenkins/jenkins:2.492.3-jdk17
+FROM jenkins/jenkins:2.504.3-jdk17
 
 
 ARG USER_NAME
